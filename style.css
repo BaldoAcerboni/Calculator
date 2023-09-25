@@ -51,7 +51,7 @@ body {
     width: 60%;
     border-right: 2px solid black;
 }
-.button {
+button {
     font-size: 24px;
 }
 .button.num {
@@ -59,8 +59,8 @@ body {
     width: 33.3333%;
 }
 .button.op,
-.button.equal,
-.button.del {
+#equal,
+#delete {
     width: 50%;
     height: 25%;
 }
@@ -70,15 +70,15 @@ body {
 .button.op:hover {
     background-color: rgb(182, 181, 181);
 }
-.button.equal {
+#equal {
     background-color: rgb(0, 215, 0);
 }
-.button.equal:hover {
+#equal:hover {
     background-color: rgb(0, 245, 0);
 }
-.button.del {
-    background-color: rgb(255, 61, 61);
-}
-.button.del:hover {
+#delete {
     background-color: rgb(255, 40, 40);
+}
+#delete:hover {
+    background-color: rgb(255, 61, 61);
 }
