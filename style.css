@@ -77,8 +77,8 @@ button {
     background-color: rgb(0, 245, 0);
 }
 #delete {
-    background-color: rgb(255, 40, 40);
+    background-color: rgb(255, 0, 0);
 }
 #delete:hover {
-    background-color: rgb(255, 61, 61);
+    background-color: rgb(254, 49, 49);
 }
