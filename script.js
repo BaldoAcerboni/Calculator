@@ -56,31 +56,61 @@ function Calculator(input) {
     operationArr.push(input);
   } else if (
     operationArr.length === 1 &&
-    input.classList.contains("operator")
+    input.target.classList.contains("operator")
   ) {
-    operationArr.push(input);
-  } else if (
-    operationArr.length === 2 &&
-    operationArr[1] === "*" &&
-    input === "*"
-  ) {
-    operationArr[1] = "**";
+    operationArr.push(input.target.textContent);
+    currentCalc.textContent += input.target.textContent;
   } else if (operationArr.length === 2 && !isNaN(+input)) {
     operationArr.push(input);
   } else if (
     operationArr.length === 3 &&
-    input.classList.contains("operator")
+    input.target.classList.contains("operator")
   ) {
-    result = decideOperation(operationArr);
+    result = decideOperation(operationArr).toFixed(2);
     operationArr.length = 0;
-    operationArr.push(result);
+    operationArr.push(result, input.target.textContent);
+    calcHistory.textContent = currentCalc.textContent;
+    currentCalc.textContent = operationArr.join("");
   }
+  console.log(result);
+  console.log(operationArr);
 }
 
 function numberSetter(n) {
-  if (!isNaN(n)) {
-    numArr.push(n);
-  } else if (n === "." && numArr.indexOf(n) === -1) {
-    numArr.push(n);
+  if (
+    !isNaN(n.target.textContent) &&
+    numArr.indexOf(".") < numArr.length - 2 &&
+    numArr.indexOf(".") !== -1
+  ) {
+    console.log("max two decimal number, sorry I'm too lazy for anything else");
+    return;
+  } else if (!isNaN(n.target.textContent)) {
+    numArr.push(n.target.textContent);
+    currentCalc.textContent += n.target.textContent;
+  } else if (
+    n.target.textContent === "." &&
+    numArr.indexOf(n.target.textContent) === -1
+  ) {
+    numArr.push(n.target.textContent);
+    currentCalc.textContent += n.target.textContent;
   }
 }
+
+function makeNumber() {
+  let num = parseFloat(numArr.join(""));
+  numArr.length = 0;
+  Calculator(num);
+  return num;
+}
+
+Array.from(numbers).forEach((num) => {
+  num.addEventListener("click", numberSetter);
+});
+
+Array.from(operators).forEach((op) => {
+  op.addEventListener("click", makeNumber);
+});
+
+Array.from(operators).forEach((op) => {
+  op.addEventListener("click", Calculator);
+});
